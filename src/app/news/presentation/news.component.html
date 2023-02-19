@@ -1,0 +1,39 @@
+<div class="row">
+  <!-- Details  -->
+  <div class="detailsBox">
+    <div>
+      <h3>جزییات خبر</h3>
+    </div>
+    <div class="body">
+      <h3 class="title">
+        {{detailsData.title}}
+      </h3>
+      <span>
+        {{detailsData.publishDate}}
+      </span>
+      <p>
+        {{detailsData.body}}
+      </p>
+    </div>
+    {{detailsData}}
+    <div class="footer" *ngIf="detailsData">
+      <button mat-button color="primary" (click)="openDialog(detailsData)">
+        نمایش جزییات خبر
+      </button>
+    </div>
+  </div>
+
+  <!-- //News  -->
+  <div class="newsBox">
+    <div>
+      <h3>اخبار روز</h3>
+    </div>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of news" cdkDrag (click)="showDetails(item)">
+        {{item.id}}:{{item.title}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-details *ngIf="isShowModal" [detailsData]="detailsData" (onClose)="closeDialog()"></app-modal-details>
